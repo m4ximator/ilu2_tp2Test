@@ -19,7 +19,6 @@ public class BoundaryEmmenager {
 				question.append("Êtes-vous :\n");
 				question.append("1 - un druide.\n");
 				question.append("2 - un gaulois.\n");
-				
 
 				choixUtilisateur = Clavier.entrerEntier(question.toString());
 				switch (choixUtilisateur) {
@@ -28,7 +27,9 @@ public class BoundaryEmmenager {
 					break;
 
 				case 2:
-					emmenagerGaulois(nomVisiteur);
+					System.out.println("Bienvenue villageois " + nomVisiteur);
+					int force = Clavier.entrerEntier("Quelle est votre force ?\t");
+					controlEmmenager.ajouterGaulois(nomVisiteur, force);
 					break;
 
 				default:
@@ -40,28 +41,19 @@ public class BoundaryEmmenager {
 	}
 
 	private void emmenagerDruide(String nomVisiteur) {
-		StringBuilder questionDruide = new StringBuilder();
-		int force = 0;
-		int effetPotionMin = 0;
-		int effetPotionMax = 0;
-		questionDruide.append("Donnez la force,puis effetpotionmin puis effetpotionmax du Druide :\n");
+		
+		int force;
+		int effetPotionMax;
+		int effetPotionMin;
 		do {
-			force = Clavier.entrerEntier(questionDruide.toString() + "force: ");
-			effetPotionMin = Clavier.entrerEntier("effetPotionMin: ");
-			effetPotionMax = Clavier.entrerEntier("effetPotionMax: ");
-		} while (force < 1 && effetPotionMax < 1 && effetPotionMin < 1);
+			force = Clavier.entrerEntier("Quelle est votre force ?\t");
+			effetPotionMin = Clavier.entrerEntier("Quelle est la force de potion la plus faible que vous produisez ?\t ");
+			effetPotionMax = Clavier.entrerEntier("Quelle est la force de potion la plus forte que vous produisez ?\t ");
+			if (effetPotionMax<effetPotionMin)
+				System.out.println("Attention Druide, vous vous etes trompe entre le minimum et le maximum\n");
+		} while (effetPotionMax<effetPotionMin);
 
 		controlEmmenager.ajouterDruide(nomVisiteur, force, effetPotionMin, effetPotionMax);
 	}
 
-	private void emmenagerGaulois(String nomVisiteur) {
-		StringBuilder questionGaulois = new StringBuilder();
-		int choixForceUtilisateur = 0;
-		questionGaulois.append("Donnez la force du gaulois\n");
-		do {
-			choixForceUtilisateur = Clavier.entrerEntier(questionGaulois.toString());
-
-		} while (choixForceUtilisateur < 1);
-		controlEmmenager.ajouterGaulois(nomVisiteur, choixForceUtilisateur);
-	}
 }
