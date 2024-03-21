@@ -14,18 +14,15 @@ public class ControlPrendreEtal {
 	}
 
 	public boolean resteEtals() {
-		boolean etalDisponible=village.rechercherEtalVide();
-		return etalDisponible;
+		return village.rechercherEtalVide();
 	}
 
 	public int prendreEtal(String nomVendeur, String produit, int nbProduit) {
 		Gaulois gaulois=village.trouverHabitant(nomVendeur);
-		int numeroEtal = village.installerVendeur(gaulois,produit,nbProduit);;
-		return numeroEtal;
+		return village.installerVendeur(gaulois,produit,nbProduit);
 	}
 
 	public boolean verifierIdentite(String nomVendeur) {
-		boolean nomVendeurConnu= controlVerifierIdentite.verifierIdentite(nomVendeur);
-		return nomVendeurConnu;
+		return controlVerifierIdentite.verifierIdentite(nomVendeur);
 	}
 }
